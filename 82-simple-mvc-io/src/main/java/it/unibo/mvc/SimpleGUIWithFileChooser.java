@@ -42,7 +42,7 @@ public final class SimpleGUIWithFileChooser {
         final JTextField textField = new JTextField();
         final JButton browseButton = new JButton("Browse...");
         textField.setEditable(false);
-        textField.setText(new Controller().getCurrentFile().getName());
+        textField.setText(new Controller().getCurrentFile().getName());     //TODO name or path?
         fileChooserPanel.setLayout(new BorderLayout());
         fileChooserPanel.add(textField, BorderLayout.CENTER);
         fileChooserPanel.add(browseButton, BorderLayout.EAST);
@@ -71,19 +71,22 @@ public final class SimpleGUIWithFileChooser {
             public void actionPerformed(final ActionEvent event) {
                 // Creating and displaying the file chooser.
                 final JFileChooser chooser = new JFileChooser();
-                final var choice = chooser.showSaveDialog(browseButton);
+                final var choice = chooser.showSaveDialog(frame);
 
-                //TODO make it into a switch case
-                if (choice == JFileChooser.APPROVE_OPTION) {
-                    final File selectedFile = chooser.getSelectedFile();
-                    final var controller = new Controller();
-                    controller.setCurrentFile(selectedFile.getName());  //TODO change controller to get File as input maybe?
-                    textField.setText(new Controller().getCurrentFile().getName());
-                    textField.repaint();    //TODO not working
-                } else if (choice == JFileChooser.CANCEL_OPTION) {
-                    
-                } else {
-                    //error
+                switch (choice) {
+                    case JFileChooser.APPROVE_OPTION:
+                        final File selectedFile = chooser.getSelectedFile();
+                        final var controller = new Controller();
+                        controller.setCurrentFile(selectedFile.getName());  //TODO change controller to get File as input maybe?
+                        textField.setText(selectedFile.getName());          //TODO name or path?
+                        break;
+
+                    case JFileChooser.CANCEL_OPTION:
+                        break;
+                
+                    default:
+                        JOptionPane.showMessageDialog(frame, choice, "Oops", JOptionPane.ERROR_MESSAGE);
+                        break;
                 }
             }
         });
