@@ -55,7 +55,7 @@ public final class SimpleGUI {
     /**
      * Displays the graphical interface.
      */
-    public void display() {
+    private void display() {
         final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         final int height = (int) screen.getHeight();
         final int width = (int) screen.getWidth();
