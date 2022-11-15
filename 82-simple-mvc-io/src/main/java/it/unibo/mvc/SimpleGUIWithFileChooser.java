@@ -25,6 +25,7 @@ public final class SimpleGUIWithFileChooser {
 
     private static final int PROPORTION = 5;
     private final JFrame frame = new JFrame();
+    private final Controller controller = new Controller();
 
     public SimpleGUIWithFileChooser() {
         // Setting the app canvas that will contain all the components.
@@ -42,7 +43,7 @@ public final class SimpleGUIWithFileChooser {
         final JTextField textField = new JTextField();
         final JButton browseButton = new JButton("Browse...");
         textField.setEditable(false);
-        textField.setText(new Controller().getCurrentFile().getName());     //TODO name or path?
+        textField.setText(controller.getCurrentFile().getName());
         fileChooserPanel.setLayout(new BorderLayout());
         fileChooserPanel.add(textField, BorderLayout.CENTER);
         fileChooserPanel.add(browseButton, BorderLayout.EAST);
@@ -56,8 +57,8 @@ public final class SimpleGUIWithFileChooser {
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent event) {
-                final var controller = new Controller();
                 try {
+                    System.out.println("SAVE: " + controller.getCurrentFile());
                     controller.saveToFile(textArea.getText());
                 } catch (IOException e) {
                     JOptionPane.showMessageDialog(frame, e, "Error", JOptionPane.ERROR_MESSAGE);
@@ -76,9 +77,10 @@ public final class SimpleGUIWithFileChooser {
                 switch (choice) {
                     case JFileChooser.APPROVE_OPTION:
                         final File selectedFile = chooser.getSelectedFile();
-                        final var controller = new Controller();
-                        controller.setCurrentFile(selectedFile.getName());  //TODO change controller to get File as input maybe?
-                        textField.setText(selectedFile.getName());          //TODO name or path?
+                        controller.setCurrentFile(selectedFile);
+                        System.out.println("LOAD: " + controller.getCurrentFile());
+                        textField.setText(selectedFile.getName());
+                        textArea.setText("");   // Resets the text area once a new file is loaded.
                         break;
 
                     case JFileChooser.CANCEL_OPTION:
