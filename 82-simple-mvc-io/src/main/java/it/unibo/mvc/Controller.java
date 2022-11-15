@@ -15,11 +15,10 @@ public class Controller {
     private File currentFile = new File(HOME_DIR + SEPARATOR + "output.txt");
 
     /**
-     * @param filePath is the given {@code String} that will be used to create a new
-     * {@code File} object.
+     * @param file of type {@code File} to set as the current file in the {@link Controller}.
      */
-    public void setCurrentFile(final String filePath) {
-        this.currentFile = new File(filePath);
+    public void setCurrentFile(final File file) {
+        this.currentFile = file;
     }
 
     /**
