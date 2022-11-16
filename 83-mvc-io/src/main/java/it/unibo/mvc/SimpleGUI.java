@@ -23,6 +23,9 @@ public final class SimpleGUI {
     private final JFrame frame = new JFrame();
     private final Controller controller;
 
+    /**
+     * GUI constructor.
+     */
     public SimpleGUI() {
         this.controller = new SimpleController();
 
@@ -59,7 +62,7 @@ public final class SimpleGUI {
             @Override
             public void actionPerformed(final ActionEvent event) {
                 final StringBuilder result = new StringBuilder();
-                List<String> history = controller.getPrintedStringHistory();
+                final List<String> history = controller.getPrintedStringHistory();
                 for (final String string : history) {
                     result.append(string + "\n");
                 }
@@ -77,7 +80,11 @@ public final class SimpleGUI {
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
+    /**
+     * Launches the application.
+     * @param args unused.
+     */
+    public static void main(final String[] args) {
         new SimpleGUI().display();
     }
 

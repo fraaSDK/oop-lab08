@@ -11,7 +11,7 @@ public interface Controller {
      * Sets a string to be printed next.
      * @param string to print.
      */
-    void setNextString(final String string);
+    void setNextString(String string);
 
     /**
      * @return the next string to be printed.
@@ -28,6 +28,6 @@ public interface Controller {
      * Prints the current string.
      * @throws IllegalStateException if the current string is unset.
      */
-    void printCurrentString() throws IllegalStateException;
+    void printCurrentString();
 
 }

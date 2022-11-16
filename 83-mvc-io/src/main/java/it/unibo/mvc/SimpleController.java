@@ -11,7 +11,7 @@ import java.util.Objects;
 public final class SimpleController implements Controller {
 
     private String currentString;
-    private List<String> stringHistory = new ArrayList<>();
+    private final List<String> stringHistory = new ArrayList<>();
 
     @Override
     public void setNextString(final String string) {
@@ -29,9 +29,9 @@ public final class SimpleController implements Controller {
     }
 
     @Override
-    public void printCurrentString() throws IllegalStateException {
+    public void printCurrentString() {
         if (Objects.nonNull(this.currentString)) {
-            System.out.println(this.currentString);
+            System.out.println(this.currentString);    // NOPMD: allowed for exercise.
             stringHistory.add(this.currentString);
         } else {
             throw new IllegalStateException();
