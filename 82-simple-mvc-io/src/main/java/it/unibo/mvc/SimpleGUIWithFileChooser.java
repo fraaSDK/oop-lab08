@@ -27,6 +27,9 @@ public final class SimpleGUIWithFileChooser {
     private final JFrame frame = new JFrame();
     private final Controller controller = new Controller();
 
+    /**
+     * GUI constructor.
+     */
     public SimpleGUIWithFileChooser() {
         // Setting the app canvas that will contain all the components.
         final JPanel canvas = new JPanel();
@@ -58,11 +61,11 @@ public final class SimpleGUIWithFileChooser {
             @Override
             public void actionPerformed(final ActionEvent event) {
                 try {
-                    System.out.println("SAVE: " + controller.getCurrentFile());
+                    System.out.println("SAVE: " + controller.getCurrentFile());    // NOPMD: allowed for exercise.
                     controller.saveToFile(textArea.getText());
                 } catch (IOException e) {
                     JOptionPane.showMessageDialog(frame, e, "Error", JOptionPane.ERROR_MESSAGE);
-                    e.printStackTrace();
+                    e.printStackTrace();    // NOPMD: allowed for exercise.
                 }
             }
         });
@@ -78,14 +81,14 @@ public final class SimpleGUIWithFileChooser {
                     case JFileChooser.APPROVE_OPTION:
                         final File selectedFile = chooser.getSelectedFile();
                         controller.setCurrentFile(selectedFile);
-                        System.out.println("LOAD: " + controller.getCurrentFile());
+                        System.out.println("LOAD: " + controller.getCurrentFile());    // NOPMD: allowed for exercise.
                         textField.setText(selectedFile.getName());
                         textArea.setText("");   // Resets the text area once a new file is loaded.
                         break;
 
                     case JFileChooser.CANCEL_OPTION:
                         break;
-                
+
                     default:
                         JOptionPane.showMessageDialog(frame, choice, "Oops", JOptionPane.ERROR_MESSAGE);
                         break;
@@ -106,7 +109,11 @@ public final class SimpleGUIWithFileChooser {
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
+    /**
+     * Launches the application.
+     * @param args unused
+     */
+    public static void main(final String[] args) {
         new SimpleGUIWithFileChooser().display();
     }
 }

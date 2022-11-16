@@ -22,6 +22,9 @@ public final class SimpleGUI {
     private static final int PROPORTION = 5;
     private final JFrame frame = new JFrame();
 
+    /**
+     * GUI constructor.
+     */
     public SimpleGUI() {
         // Setting the app canvas that will contain all the components.
         final JPanel canvas = new JPanel();
@@ -46,7 +49,7 @@ public final class SimpleGUI {
                     controller.saveToFile(textArea.getText());
                 } catch (IOException e) {
                     JOptionPane.showMessageDialog(frame, e, "Error", JOptionPane.ERROR_MESSAGE);
-                    e.printStackTrace();
+                    e.printStackTrace();    // NOPMD: allowed for exercise.
                 }
             }
         });
@@ -64,7 +67,11 @@ public final class SimpleGUI {
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
+    /**
+     * Launches the application.
+     * @param args unused.
+     */
+    public static void main(final String[] args) {
         new SimpleGUI().display();
     }
 
