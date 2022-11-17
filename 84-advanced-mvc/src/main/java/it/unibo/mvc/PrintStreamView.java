@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**
  * This class implements a view that can write on any PrintStream.
@@ -20,6 +21,7 @@ public final class PrintStreamView implements DrawNumberView {
      *
      * @param stream the {@link PrintStream} where to write
      */
+    @SuppressFBWarnings()
     public PrintStreamView(final PrintStream stream) {
         out = stream;
     }
@@ -30,6 +32,7 @@ public final class PrintStreamView implements DrawNumberView {
      * @param path a file path
      * @throws FileNotFoundException 
      */
+    @SuppressFBWarnings()
     public PrintStreamView(final String path) throws FileNotFoundException {
         out = new PrintStream(new FileOutputStream(new File(path)));
     }

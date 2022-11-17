@@ -15,6 +15,7 @@ public final class DrawNumberImpl implements DrawNumber {
     private final Random random = new Random();
 
     /**
+     * @param config object used to set the game up.
      * @throws IllegalStateException if the configuration is not consistent
      */
     public DrawNumberImpl(final Configuration config) {

@@ -4,9 +4,11 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**
  */
@@ -31,18 +33,20 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
         }
 
         final var configBuilder = new Configuration.Builder();
-        try (var file = new BufferedReader(new InputStreamReader(ClassLoader.getSystemResourceAsStream(configFile)))) {
+        try (var file = new BufferedReader(
+                new InputStreamReader(ClassLoader.getSystemResourceAsStream(configFile), StandardCharsets.UTF_8)
+            )) {
             for (var line = file.readLine(); Objects.nonNull(line); line = file.readLine()) {
                 final String[] tokens = line.split(":");
                 final String key = tokens[0];
                 final int value = Integer.parseInt(tokens[1].trim());
 
                 if (key.contains("maximum")) {
-                    configBuilder.setMax(value);
+                    configBuilder.updateMax(value);
                 } else if (key.contains("minimum")) {
-                    configBuilder.setMin(value);
+                    configBuilder.updateMin(value);
                 } else if (key.contains("attempts")) {
-                    configBuilder.setAttempts(value);
+                    configBuilder.updateAttempts(value);
                 }
             }
         } catch (IOException e) {
@@ -73,6 +77,7 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
         this.model.reset();
     }
 
+    @SuppressFBWarnings()
     @Override
     public void quit() {
         /*
